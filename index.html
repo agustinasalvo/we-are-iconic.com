@@ -833,8 +833,11 @@ button{
   display:inline-flex;
   align-items:center;
   gap:.75rem;
-  background:none;
-  border: 1px solid rgba(244,239,230,.3);
+  background: rgba(6,18,38,.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(244,239,230,.35);
+  box-shadow: 0 6px 24px rgba(0,0,0,.25);
   color: var(--stone-ivory);
   padding: .9rem 1.7rem;
   border-radius: 999px;
@@ -846,7 +849,7 @@ button{
 }
 .day-continue__btn:hover, .day-continue__btn:focus-visible{
   border-color: var(--soft-gold);
-  background: rgba(214,173,98,.1);
+  background: rgba(6,18,38,.85);
   transform: translateY(-2px);
 }
 .day-continue__btn svg{ width:15px; height:15px; }
