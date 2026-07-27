@@ -119,6 +119,34 @@ button{
   border:0;
 }
 
+.sound-toggle{
+  position:fixed;
+  top: calc(1rem + env(safe-area-inset-top));
+  right: calc(1rem + env(safe-area-inset-right));
+  z-index: 50;
+  width:44px; height:44px;
+  border-radius:50%;
+  border: 1px solid rgba(244,239,230,.3);
+  background: rgba(6,18,38,.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--stone-ivory);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  transition: opacity .8s var(--ease-arch) 1.6s, border-color var(--dur-fast) var(--ease-soft), background var(--dur-fast) var(--ease-soft);
+}
+.sound-toggle.is-on{ opacity:.85; }
+.sound-toggle:hover, .sound-toggle:focus-visible{
+  border-color: var(--soft-gold);
+  background: rgba(214,173,98,.12);
+}
+.sound-toggle svg{ width:18px; height:18px; }
+.sound-toggle .icon-muted{ display:none; }
+.sound-toggle[aria-pressed="false"] .icon-on{ display:none; }
+.sound-toggle[aria-pressed="false"] .icon-muted{ display:block; }
+
 .skip-link{
   position:absolute;
   left: 1rem; top: -60px;
@@ -157,6 +185,26 @@ button{
   pointer-events:none;
 }
 
+.cursor-halo{
+  position:fixed;
+  top:0; left:0;
+  width: 480px; height:480px;
+  margin: -240px 0 0 -240px;
+  border-radius:50%;
+  background: radial-gradient(circle,
+      rgba(214,173,98,.24) 0%,
+      rgba(214,173,98,.12) 32%,
+      rgba(42,157,244,.05) 55%,
+      transparent 72%);
+  pointer-events:none;
+  z-index: 2;
+  mix-blend-mode: screen;
+  opacity:0;
+  transition: opacity .6s var(--ease-soft);
+  will-change: transform;
+}
+.cursor-halo.is-active{ opacity:1; }
+
 .grain{
   position:fixed;
   inset:0;
@@ -178,7 +226,7 @@ button{
   display:flex;
   flex-direction:column;
   align-items:center;
-  justify-content:center;
+  justify-content:flex-start;
   text-align:center;
   padding: var(--edge);
   padding-top: calc(var(--edge) + env(safe-area-inset-top));
@@ -223,15 +271,16 @@ button{
 }
 .hero__beam.is-on{ opacity:.85; }
 
-/* the branching vertical columns, drawn with layered gradients */
+/* the branching vertical columns, drawn with layered gradients —
+   each tinted with a different hue from the stained-glass palette */
 .hero__columns{
   position:absolute; inset:0;
   background-image:
-    radial-gradient(1px 55vh at 18% 0%, rgba(244,239,230,.18), transparent 70%),
-    radial-gradient(1px 70vh at 32% 0%, rgba(244,239,230,.14), transparent 70%),
-    radial-gradient(1px 85vh at 50% 0%, rgba(244,239,230,.22), transparent 75%),
-    radial-gradient(1px 70vh at 68% 0%, rgba(244,239,230,.14), transparent 70%),
-    radial-gradient(1px 55vh at 82% 0%, rgba(244,239,230,.18), transparent 70%);
+    radial-gradient(1px 55vh at 18% 0%, rgba(239,112,93,.16), transparent 70%),   /* coral */
+    radial-gradient(1px 70vh at 32% 0%, rgba(46,196,182,.14), transparent 70%),   /* turquoise */
+    radial-gradient(1px 85vh at 50% 0%, rgba(247,196,91,.24), transparent 75%),   /* golden */
+    radial-gradient(1px 70vh at 68% 0%, rgba(55,166,107,.14), transparent 70%),   /* emerald */
+    radial-gradient(1px 55vh at 82% 0%, rgba(114,87,200,.16), transparent 70%);   /* violet */
   opacity:0;
   transition: opacity 1.4s var(--ease-arch) .5s;
 }
@@ -244,7 +293,9 @@ button{
     radial-gradient(60% 55% at 8% 20%, rgba(20,100,210,.35), transparent 70%),
     radial-gradient(55% 50% at 95% 15%, rgba(46,196,182,.30), transparent 70%),
     radial-gradient(50% 45% at 90% 85%, rgba(114,87,200,.28), transparent 70%),
-    radial-gradient(55% 50% at 5% 90%, rgba(239,112,93,.25), transparent 70%);
+    radial-gradient(55% 50% at 5% 90%, rgba(239,112,93,.25), transparent 70%),
+    radial-gradient(40% 35% at 50% 8%, rgba(247,196,91,.20), transparent 70%),
+    radial-gradient(35% 30% at 30% 65%, rgba(55,166,107,.16), transparent 70%);
   opacity:0;
   transition: opacity 1.8s var(--ease-arch) .7s;
   mix-blend-mode: screen;
@@ -261,6 +312,7 @@ button{
   position:relative;
   z-index: 2;
   max-width: 900px;
+  margin: auto 0;
 }
 
 .hero__eyebrow{
@@ -383,10 +435,9 @@ button{
 }
 
 .hero__scroll-hint{
-  position:absolute;
-  bottom: calc(1.6rem + env(safe-area-inset-bottom));
-  left:50%;
-  transform: translateX(-50%);
+  position:relative;
+  flex-shrink:0;
+  margin-top: clamp(1.5rem, 4vh, 3rem);
   font-size:.65rem;
   letter-spacing:.3em;
   text-transform:uppercase;
@@ -582,12 +633,13 @@ button{
   inset:0;
   z-index:0;
   pointer-events:none;
-  opacity:.55;
+  opacity:.62;
   background:
     radial-gradient(45% 40% at 12% 8%, color-mix(in srgb, var(--atmo-a) 55%, transparent), transparent 70%),
     radial-gradient(40% 35% at 90% 15%, color-mix(in srgb, var(--atmo-b) 45%, transparent), transparent 70%),
     radial-gradient(45% 40% at 85% 90%, color-mix(in srgb, var(--atmo-c) 40%, transparent), transparent 70%),
-    radial-gradient(40% 35% at 8% 92%, color-mix(in srgb, var(--atmo-d) 40%, transparent), transparent 70%);
+    radial-gradient(40% 35% at 8% 92%, color-mix(in srgb, var(--atmo-d) 40%, transparent), transparent 70%),
+    radial-gradient(30% 26% at 50% 45%, color-mix(in srgb, var(--ruby) 22%, transparent), transparent 70%);
   transition: opacity 1.2s var(--ease-arch);
   mix-blend-mode: screen;
 }
@@ -633,10 +685,11 @@ button{
   left: var(--edge);
   top:0; bottom:0;
   width:1px;
-  background: linear-gradient(180deg, transparent, rgba(244,239,230,.28) 6%, rgba(244,239,230,.28) 94%, transparent);
-}
-@media (min-width: 860px){
-  .timeline__spine{ left:50%; transform: translateX(-50%); }
+  background: linear-gradient(180deg,
+    transparent,
+    color-mix(in srgb, var(--turquoise) 35%, rgba(244,239,230,.32)) 6%,
+    color-mix(in srgb, var(--violet) 35%, rgba(244,239,230,.32)) 94%,
+    transparent);
 }
 
 .event{
@@ -661,16 +714,15 @@ button{
   z-index: 1;
 }
 
+.event__spine{ display:none; }
+
+/* A single left-aligned column at every screen size, keeping the
+   timeline, marker and text always in the same clear relationship. */
 .event__grid{
   display:grid;
   grid-template-columns: 1fr;
   gap: .6rem 2.4rem;
-}
-@media (min-width: 860px){
-  .event__grid{ grid-template-columns: 200px 1fr; align-items:start; }
-  .event--offset .event__grid{ grid-template-columns: 1fr 200px; }
-  .event--offset .event__time{ order:2; text-align:left; }
-  .event--offset .event__body{ order:1; }
+  max-width: var(--narrow-max);
 }
 
 .event__time{
@@ -769,6 +821,36 @@ button{
   opacity:.85;
 }
 
+.day-continue{
+  position:relative;
+  z-index:1;
+  display:flex;
+  justify-content:center;
+  padding: 0 var(--edge) clamp(3rem,7vw,5rem);
+  margin-top: clamp(-1.5rem, -3vw, -1rem);
+}
+.day-continue__btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.75rem;
+  background:none;
+  border: 1px solid rgba(244,239,230,.3);
+  color: var(--stone-ivory);
+  padding: .9rem 1.7rem;
+  border-radius: 999px;
+  font-size: .78rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  min-height:44px;
+  transition: border-color var(--dur-fast) var(--ease-soft), background var(--dur-fast) var(--ease-soft), transform var(--dur-fast) var(--ease-soft);
+}
+.day-continue__btn:hover, .day-continue__btn:focus-visible{
+  border-color: var(--soft-gold);
+  background: rgba(214,173,98,.1);
+  transform: translateY(-2px);
+}
+.day-continue__btn svg{ width:15px; height:15px; }
+
 /* ============================================================
    CLOSING
    ============================================================ */
@@ -815,7 +897,10 @@ footer{
 }
 .footer__fade{
   position:absolute; inset:0;
-  background: radial-gradient(120% 100% at 50% 0%, rgba(20,100,210,.12), transparent 60%);
+  background:
+    radial-gradient(120% 100% at 50% 0%, rgba(20,100,210,.12), transparent 60%),
+    radial-gradient(60% 60% at 85% 40%, rgba(114,87,200,.08), transparent 70%),
+    radial-gradient(55% 55% at 10% 60%, rgba(247,196,91,.07), transparent 70%);
   pointer-events:none;
 }
 .footer__grid{
@@ -870,6 +955,11 @@ footer{
 <body>
 
 <a class="skip-link" href="#agenda">Skip to agenda</a>
+<button class="sound-toggle" id="soundToggle" type="button" aria-pressed="true" aria-label="Mute the opening sound">
+  <svg class="icon-on" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M17 9c1.2 1 1.9 2 1.9 3s-.7 2-1.9 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M19.5 6.5c2 1.8 3 3.6 3 5.5s-1 3.7-3 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+  <svg class="icon-muted" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+</button>
+<div class="cursor-halo" id="cursorHalo" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
 
 <!-- ============================================================
@@ -977,6 +1067,7 @@ footer{
       <article class="event">
         <span class="event__marker" aria-hidden="true"></span>
         <div class="event__grid">
+          <span class="event__spine" aria-hidden="true"></span>
           <div class="event__time"><span class="event__number">No. 01</span>13:30</div>
           <div class="event__body">
             <h3 class="event__title">Welcome Lunch</h3>
@@ -995,6 +1086,7 @@ footer{
       <article class="event event--offset">
         <span class="event__marker" aria-hidden="true"></span>
         <div class="event__grid">
+          <span class="event__spine" aria-hidden="true"></span>
           <div class="event__time"><span class="event__number">No. 02</span>16:30</div>
           <div class="event__body">
             <h3 class="event__title">Community Sessions</h3>
@@ -1017,6 +1109,7 @@ footer{
       <article class="event">
         <span class="event__marker" aria-hidden="true"></span>
         <div class="event__grid">
+          <span class="event__spine" aria-hidden="true"></span>
           <div class="event__time"><span class="event__number">No. 03</span>20:00</div>
           <div class="event__body">
             <h3 class="event__title">Dinner with a Special Guest</h3>
@@ -1037,6 +1130,12 @@ footer{
         </div>
       </article>
     </div>
+    <div class="day-continue">
+      <button class="day-continue__btn" data-goto="saturday" type="button">
+        <span>Continue to Saturday</span>
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
   </div>
 
   <!-- SATURDAY -->
@@ -1047,6 +1146,7 @@ footer{
       <article class="event">
         <span class="event__marker" aria-hidden="true"></span>
         <div class="event__grid">
+          <span class="event__spine" aria-hidden="true"></span>
           <div class="event__time"><span class="event__number">No. 01</span>08:00</div>
           <div class="event__body">
             <h3 class="event__title">Breakfast</h3>
@@ -1060,6 +1160,7 @@ footer{
       <article class="event event--offset">
         <span class="event__marker" aria-hidden="true"></span>
         <div class="event__grid">
+          <span class="event__spine" aria-hidden="true"></span>
           <div class="event__time"><span class="event__number">No. 02</span>09:00</div>
           <div class="event__body">
             <h3 class="event__title">Private Visit to Sagrada Família</h3>
@@ -1072,6 +1173,7 @@ footer{
       <article class="event">
         <span class="event__marker" aria-hidden="true"></span>
         <div class="event__grid">
+          <span class="event__spine" aria-hidden="true"></span>
           <div class="event__time"><span class="event__number">No. 03</span>12:00</div>
           <div class="event__body">
             <h3 class="event__title">Departure</h3>
@@ -1083,6 +1185,7 @@ footer{
       <article class="event event--offset">
         <span class="event__marker" aria-hidden="true"></span>
         <div class="event__grid">
+          <span class="event__spine" aria-hidden="true"></span>
           <div class="event__time"><span class="event__number">No. 04</span>12:30</div>
           <div class="event__body">
             <h3 class="event__title">Culinary Masterclass</h3>
@@ -1097,6 +1200,7 @@ footer{
       <article class="event">
         <span class="event__marker" aria-hidden="true"></span>
         <div class="event__grid">
+          <span class="event__spine" aria-hidden="true"></span>
           <div class="event__time"><span class="event__number">No. 05</span>14:30</div>
           <div class="event__body">
             <h3 class="event__title">Lunch</h3>
@@ -1110,6 +1214,7 @@ footer{
       <article class="event event--offset">
         <span class="event__marker" aria-hidden="true"></span>
         <div class="event__grid">
+          <span class="event__spine" aria-hidden="true"></span>
           <div class="event__time"><span class="event__number">No. 06</span>16:30</div>
           <div class="event__body">
             <h3 class="event__title">Free Time</h3>
@@ -1122,6 +1227,7 @@ footer{
       <article class="event">
         <span class="event__marker" aria-hidden="true"></span>
         <div class="event__grid">
+          <span class="event__spine" aria-hidden="true"></span>
           <div class="event__time"><span class="event__number">No. 07</span>20:30</div>
           <div class="event__body">
             <h3 class="event__title">Farewell Dinner Party</h3>
@@ -1131,6 +1237,12 @@ footer{
           </div>
         </div>
       </article>
+    </div>
+    <div class="day-continue">
+      <button class="day-continue__btn" data-goto="sunday" type="button">
+        <span>Continue to Sunday</span>
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
     </div>
   </div>
 
@@ -1142,6 +1254,7 @@ footer{
       <article class="event">
         <span class="event__marker" aria-hidden="true"></span>
         <div class="event__grid">
+          <span class="event__spine" aria-hidden="true"></span>
           <div class="event__time"><span class="event__number">No. 01</span>08:00</div>
           <div class="event__body">
             <h3 class="event__title">Breakfast</h3>
@@ -1154,6 +1267,7 @@ footer{
       <article class="event event--offset">
         <span class="event__marker" aria-hidden="true"></span>
         <div class="event__grid">
+          <span class="event__spine" aria-hidden="true"></span>
           <div class="event__time"><span class="event__number">No. 02</span>09:30</div>
           <div class="event__body">
             <h3 class="event__title">Gothic Quarter Walk</h3>
@@ -1167,6 +1281,7 @@ footer{
       <article class="event">
         <span class="event__marker" aria-hidden="true"></span>
         <div class="event__grid">
+          <span class="event__spine" aria-hidden="true"></span>
           <div class="event__time"><span class="event__number">No. 03</span>12:00</div>
           <div class="event__body">
             <h3 class="event__title">Check-out and Departures</h3>
@@ -1175,6 +1290,12 @@ footer{
           </div>
         </div>
       </article>
+    </div>
+    <div class="day-continue">
+      <button class="day-continue__btn" data-goto="friday" type="button">
+        <span>Back to Friday</span>
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
     </div>
   </div>
 </section>
@@ -1228,6 +1349,110 @@ footer{
   "use strict";
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+
+  /* ----------------------------------------------------------
+     OPENING SOUND — a soft synthesized chord, built entirely with
+     the Web Audio API (no external audio file). Browsers block
+     audio until a genuine user gesture, so we try immediately and
+     fall back to the first pointerdown/keydown/touchstart.
+     ---------------------------------------------------------- */
+  var soundEnabled = true;
+  var chimePlayed = false;
+  var audioCtx = null;
+
+  function initAudio(){
+    if(audioCtx) return audioCtx;
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if(!AC) return null;
+    audioCtx = new AC();
+    return audioCtx;
+  }
+
+  function playOpeningChime(){
+    var ctx = initAudio();
+    if(!ctx) return;
+    var now = ctx.currentTime;
+
+    var master = ctx.createGain();
+    master.gain.setValueAtTime(0, now);
+    master.gain.linearRampToValueAtTime(0.15, now + 1.1);
+    master.gain.linearRampToValueAtTime(0.09, now + 2.4);
+    master.gain.linearRampToValueAtTime(0, now + 4.4);
+    master.connect(ctx.destination);
+
+    var filter = ctx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.value = 2400;
+    filter.connect(master);
+
+    var notes = [220.00, 329.63, 440.00, 659.25]; /* A3, E4, A4, E5 — warm, open chord */
+    notes.forEach(function(freq, i){
+      var osc = ctx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      var g = ctx.createGain();
+      g.gain.value = 0.8 / (i + 1);
+      osc.connect(g);
+      if(ctx.createStereoPanner){
+        var pan = ctx.createStereoPanner();
+        pan.pan.value = (i % 2 === 0) ? -0.25 : 0.25;
+        g.connect(pan);
+        pan.connect(filter);
+      } else {
+        g.connect(filter);
+      }
+      osc.start(now);
+      osc.stop(now + 4.5);
+    });
+  }
+
+  function firstGestureUnlock(){
+    if(chimePlayed || !soundEnabled) return;
+    var ctx = initAudio();
+    if(!ctx) return;
+    ctx.resume().then(function(){
+      if(!chimePlayed && soundEnabled){
+        playOpeningChime();
+        chimePlayed = true;
+      }
+    }).catch(function(){});
+  }
+
+  function tryPlayOpeningChime(){
+    if(chimePlayed || !soundEnabled) return;
+    var ctx = initAudio();
+    if(!ctx){ return; }
+    if(ctx.state === 'running'){
+      playOpeningChime();
+      chimePlayed = true;
+      return;
+    }
+    ctx.resume().then(function(){
+      if(ctx.state === 'running' && !chimePlayed && soundEnabled){
+        playOpeningChime();
+        chimePlayed = true;
+      }
+    }).catch(function(){});
+    /* Fallback: most browsers require a genuine gesture before audio
+       is permitted, so arm one-time listeners as a safety net. */
+    ['pointerdown','keydown','touchstart'].forEach(function(evt){
+      document.addEventListener(evt, firstGestureUnlock, { once:true, passive:true });
+    });
+  }
+
+  var soundToggle = document.getElementById('soundToggle');
+  if(soundToggle){
+    requestAnimationFrame(function(){
+      setTimeout(function(){ soundToggle.classList.add('is-on'); }, reduceMotion ? 0 : 1700);
+    });
+    soundToggle.addEventListener('click', function(){
+      soundEnabled = !soundEnabled;
+      soundToggle.setAttribute('aria-pressed', soundEnabled ? 'true' : 'false');
+      soundToggle.setAttribute('aria-label', soundEnabled ? 'Mute the opening sound' : 'Unmute the opening sound');
+      if(soundEnabled && !chimePlayed){ tryPlayOpeningChime(); }
+    });
+  }
 
   /* ----------------------------------------------------------
      OPENING SEQUENCE
@@ -1247,6 +1472,7 @@ footer{
       glass.classList.add('is-on');
       seqEls.forEach(function(el){ el.classList.add('is-on'); });
       scrollHint.classList.add('is-on');
+      tryPlayOpeningChime();
       return;
     }
 
@@ -1255,6 +1481,7 @@ footer{
       beam.classList.add('is-on');
       columns.classList.add('is-on');
       glass.classList.add('is-on');
+      tryPlayOpeningChime();
 
       seqEls.forEach(function(el){
         var delay = 350 + (parseInt(el.getAttribute('data-seq'),10) * 220);
@@ -1378,10 +1605,40 @@ footer{
   setAtmosphere('friday');
 
   /* ----------------------------------------------------------
+     DAY-CONTINUE — bottom-of-agenda jump to the next day
+     ---------------------------------------------------------- */
+  document.querySelectorAll('.day-continue__btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var day = btn.getAttribute('data-goto');
+      activateDay(day);
+      tabs.forEach(function(tab){
+        if(tab.getAttribute('data-day') === day){ tab.focus(); }
+      });
+    });
+  });
+
+  /* ----------------------------------------------------------
+     CURSOR HALO — a soft, physically-plausible glow that follows
+     the pointer on desktop; disabled for touch and reduced motion.
+     ---------------------------------------------------------- */
+  var halo = document.getElementById('cursorHalo');
+  if(!reduceMotion && !isCoarsePointer && halo){
+    var haloTimeout;
+    window.addEventListener('pointermove', function(e){
+      halo.style.transform = 'translate3d(' + e.clientX + 'px,' + e.clientY + 'px,0)';
+      halo.classList.add('is-active');
+      clearTimeout(haloTimeout);
+      haloTimeout = setTimeout(function(){ halo.classList.remove('is-active'); }, 1400);
+    }, { passive:true });
+    document.addEventListener('mouseleave', function(){ halo.classList.remove('is-active'); });
+  } else if(halo){
+    halo.remove();
+  }
+
+  /* ----------------------------------------------------------
      PARALLAX — desktop cursor / mobile drift
      ---------------------------------------------------------- */
   var lines = document.getElementById('parallaxLines');
-  var isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
 
   if(!reduceMotion && !isCoarsePointer){
     var targetX = 0, targetY = 0, curX = 0, curY = 0;
