@@ -778,6 +778,11 @@ button{
   margin: 0 0 1.1rem;
 }
 .event__desc + .event__desc{ margin-top:-.6rem; }
+.event__desc--compact{
+  font-size: .88rem;
+  max-width: 52ch;
+  color: rgba(244,239,230,.78);
+}
 
 .event__vibe{
   position:relative;
@@ -809,6 +814,70 @@ button{
   padding: .4rem .85rem;
   border: 1px solid rgba(244,239,230,.25);
   border-radius: 999px;
+}
+
+.event__time-range{
+  display:block;
+  font-family: var(--sans);
+  font-size: .75rem;
+  letter-spacing:.1em;
+  color: var(--warm-limestone);
+  font-weight:400;
+  margin-top:.2rem;
+}
+
+.session-table{
+  margin: 1.3rem 0;
+  border-top: 1px solid rgba(244,239,230,.14);
+}
+.session-table__row{
+  display:grid;
+  grid-template-columns: 108px 1fr;
+  gap: .3rem 1.2rem;
+  padding: .85rem 0;
+  border-bottom: 1px solid rgba(244,239,230,.1);
+}
+.session-table__time{
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  color: var(--soft-gold);
+  line-height:1.3;
+}
+.session-table__duration{
+  display:block;
+  font-family: var(--sans);
+  font-size: .68rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color: var(--warm-limestone);
+  opacity:.75;
+  margin-top:.15rem;
+}
+.session-table__info{ display:flex; flex-direction:column; gap:.2rem; }
+.session-table__title{
+  font-size: .98rem;
+  color: var(--stone-ivory);
+  font-weight:500;
+}
+.session-table__speaker{
+  font-family: var(--serif);
+  font-style:italic;
+  font-size: .9rem;
+  color: var(--warm-limestone);
+}
+.session-table__row--break{
+  padding: .5rem 0;
+  opacity:.65;
+}
+.session-table__row--break .session-table__time{
+  font-size: .85rem;
+  color: var(--warm-limestone);
+}
+.session-table__row--break .session-table__title{
+  font-size: .85rem;
+  font-weight:400;
+  font-style: italic;
+  color: var(--warm-limestone);
 }
 
 .event__note{
@@ -1090,17 +1159,71 @@ footer{
         <span class="event__marker" aria-hidden="true"></span>
         <div class="event__grid">
           <span class="event__spine" aria-hidden="true"></span>
-          <div class="event__time"><span class="event__number">No. 02</span>15:00</div>
+          <div class="event__time"><span class="event__number">No. 02</span>15:30</div>
           <div class="event__body">
-            <h3 class="event__title">Community Sessions</h3>
+            <h3 class="event__title">Training Session</h3>
             <p class="event__subtitle">Reflections, Training and Collective Learning</p>
             <div class="event__meta">
               <span><svg viewBox="0 0 16 16" fill="none"><path d="M8 1c-3 0-5.5 2.4-5.5 5.5C2.5 10.5 8 15 8 15s5.5-4.5 5.5-8.5C13.5 3.4 11 1 8 1z" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="6.5" r="1.8" stroke="currentColor" stroke-width="1.2"/></svg>Hotel Meliá Sarrià</span>
-              <span><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5" r="2.6" stroke="currentColor" stroke-width="1.2"/><path d="M2.5 14c.7-3 2.7-4.6 5.5-4.6s4.8 1.6 5.5 4.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>Led by Agustina, Alina, Mar &amp; Nickquolette</span>
+              <span><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5" r="2.6" stroke="currentColor" stroke-width="1.2"/><path d="M2.5 14c.7-3 2.7-4.6 5.5-4.6s4.8 1.6 5.5 4.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>Led by Agustina, Mar Melero &amp; Nickolette</span>
+              <span><svg viewBox="0 0 16 16" fill="none"><rect x="1.5" y="3.5" width="9" height="7" rx="1.2" stroke="currentColor" stroke-width="1.2"/><path d="M10.5 6.2l3.3-1.9v5.4l-3.3-1.9" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>Hybrid — Also via Google Meet</span>
             </div>
-            <p class="event__desc">A central working session bringing the entire group together in one room. This collaborative afternoon will combine community updates, shared reflections, group conversations, learning activities, practical training and collective exercises.</p>
-            <p class="event__desc">The objective is to create space for meaningful exchange, strengthen relationships across the community and transform individual experiences into shared knowledge — spanning community reflections, key learnings, shared challenges, leadership conversations, training sessions, practical exercises, collaborative discussions and future opportunities for the community.</p>
-            <span class="event__note">Full session agenda to follow</span>
+            <p class="event__desc event__desc--compact">A central working session bringing the entire group together to reflect, learn and grow — combining community updates, practical training and collective exercises to strengthen connections across the community.</p>
+            <span class="event__dress">
+              <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M5 2l3 2 3-2 2 3-2 1v8H3V6L1 5l2-3z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/></svg>
+              Dress Code — Smart Casual (Photos Will Be Taken)
+            </span>
+
+            <div class="session-table" role="table" aria-label="Community Sessions detailed schedule, 15:30 to 18:30">
+              <div class="session-table__row" role="row">
+                <div class="session-table__time" role="cell">15:30<span class="session-table__duration">10 min</span></div>
+                <div class="session-table__info" role="cell">
+                  <span class="session-table__title">Welcome &amp; Opening Remarks</span>
+                  <span class="session-table__speaker">Organizing Team</span>
+                </div>
+              </div>
+              <div class="session-table__row" role="row">
+                <div class="session-table__time" role="cell">15:40<span class="session-table__duration">45 min</span></div>
+                <div class="session-table__info" role="cell">
+                  <span class="session-table__title">Building Your Personal Brand</span>
+                  <span class="session-table__speaker">Agustina &amp; Alina</span>
+                </div>
+              </div>
+              <div class="session-table__row session-table__row--break" role="row">
+                <div class="session-table__time" role="cell">16:25<span class="session-table__duration">10 min</span></div>
+                <div class="session-table__info" role="cell">
+                  <span class="session-table__title">Break</span>
+                </div>
+              </div>
+              <div class="session-table__row" role="row">
+                <div class="session-table__time" role="cell">16:35<span class="session-table__duration">45 min</span></div>
+                <div class="session-table__info" role="cell">
+                  <span class="session-table__title">How to Build a CV That Stands Out</span>
+                  <span class="session-table__speaker">Nickolette</span>
+                </div>
+              </div>
+              <div class="session-table__row session-table__row--break" role="row">
+                <div class="session-table__time" role="cell">17:20<span class="session-table__duration">10 min</span></div>
+                <div class="session-table__info" role="cell">
+                  <span class="session-table__title">Break</span>
+                </div>
+              </div>
+              <div class="session-table__row" role="row">
+                <div class="session-table__time" role="cell">17:30<span class="session-table__duration">45 min</span></div>
+                <div class="session-table__info" role="cell">
+                  <span class="session-table__title">AI for Career Growth</span>
+                  <span class="session-table__speaker">Mar Melero</span>
+                </div>
+              </div>
+              <div class="session-table__row" role="row">
+                <div class="session-table__time" role="cell">18:15<span class="session-table__duration">15 min</span></div>
+                <div class="session-table__info" role="cell">
+                  <span class="session-table__title">Inspiring Capsule: Elebe Produciones' Journey at LSE Incubation</span>
+                  <span class="session-table__speaker">Teresa</span>
+                </div>
+              </div>
+            </div>
+
             <div class="event__vibe">
               <span class="event__vibe-label">The Vibe</span>
               <p>Collaborative, inspiring and purposeful. A focused environment to exchange experiences, learn together and deepen the connections that make the community unique.</p>
@@ -1164,7 +1287,7 @@ footer{
         <span class="event__marker" aria-hidden="true"></span>
         <div class="event__grid">
           <span class="event__spine" aria-hidden="true"></span>
-          <div class="event__time"><span class="event__number">No. 02</span>10:00</div>
+          <div class="event__time"><span class="event__number">No. 02</span>09:00</div>
           <div class="event__body">
             <h3 class="event__title">Private Visit to Sagrada Família</h3>
             <p class="event__desc">A privately guided experience through Antoni Gaudí's extraordinary architectural masterpiece. The group will explore the building's symbolism, organic geometry, sculptural columns, dramatic verticality and remarkable stained-glass light.</p>
@@ -1179,7 +1302,7 @@ footer{
           <span class="event__spine" aria-hidden="true"></span>
           <div class="event__time"><span class="event__number">No. 03</span>12:00</div>
           <div class="event__body">
-            <h3 class="event__title">Transfer Time</h3>
+            <h3 class="event__title">Departure</h3>
             <p class="event__desc">Group departure for the culinary experience.</p>
           </div>
         </div>
