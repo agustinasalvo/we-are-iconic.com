@@ -768,7 +768,20 @@ button{
   margin-bottom: .9rem;
 }
 .event__meta span{ display:inline-flex; align-items:center; gap:.4rem; }
-.event__meta svg{ width:13px; height:13px; opacity:.7; }
+.event__meta svg{ width:13px; height:13px; opacity:.7; flex-shrink:0; }
+
+.venue-link{
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(214,173,98,.45);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color .25s ease, text-decoration-color .25s ease;
+}
+.venue-link:hover, .venue-link:focus-visible{
+  color: var(--soft-gold);
+  text-decoration-color: var(--soft-gold);
+}
 
 .event__desc{
   font-size: 1rem;
@@ -1144,7 +1157,7 @@ footer{
           <div class="event__body">
             <h3 class="event__title">Welcome Lunch</h3>
             <div class="event__meta">
-              <span><svg viewBox="0 0 16 16" fill="none"><path d="M8 1c-3 0-5.5 2.4-5.5 5.5C2.5 10.5 8 15 8 15s5.5-4.5 5.5-8.5C13.5 3.4 11 1 8 1z" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="6.5" r="1.8" stroke="currentColor" stroke-width="1.2"/></svg>Hotel Meliá Sarrià</span>
+              <span><svg viewBox="0 0 16 16" fill="none"><path d="M8 1c-3 0-5.5 2.4-5.5 5.5C2.5 10.5 8 15 8 15s5.5-4.5 5.5-8.5C13.5 3.4 11 1 8 1z" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="6.5" r="1.8" stroke="currentColor" stroke-width="1.2"/></svg><a class="venue-link" href="https://www.google.com/maps/search/?api=1&query=Avinguda+de+Sarri%C3%A0%2C+50%2C+08029+Barcelona%2C+Spain" target="_blank" rel="noopener noreferrer">Hotel Meliá Sarrià</a></span>
             </div>
             <p class="event__desc">Guests arrive in Barcelona and come together for the first shared moment of the experience. The lunch marks the official beginning of the weekend and offers everyone the opportunity to reconnect, meet and settle into the rhythm of the gathering.</p>
             <div class="event__vibe">
@@ -1164,8 +1177,8 @@ footer{
             <h3 class="event__title">Training Session</h3>
             <p class="event__subtitle">Reflections, Training and Collective Learning</p>
             <div class="event__meta">
-              <span><svg viewBox="0 0 16 16" fill="none"><path d="M8 1c-3 0-5.5 2.4-5.5 5.5C2.5 10.5 8 15 8 15s5.5-4.5 5.5-8.5C13.5 3.4 11 1 8 1z" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="6.5" r="1.8" stroke="currentColor" stroke-width="1.2"/></svg>Hotel Meliá Sarrià</span>
-              <span><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5" r="2.6" stroke="currentColor" stroke-width="1.2"/><path d="M2.5 14c.7-3 2.7-4.6 5.5-4.6s4.8 1.6 5.5 4.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>Led by Agustina, Mar Melero &amp; Nickolette</span>
+              <span><svg viewBox="0 0 16 16" fill="none"><path d="M8 1c-3 0-5.5 2.4-5.5 5.5C2.5 10.5 8 15 8 15s5.5-4.5 5.5-8.5C13.5 3.4 11 1 8 1z" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="6.5" r="1.8" stroke="currentColor" stroke-width="1.2"/></svg><a class="venue-link" href="https://www.google.com/maps/search/?api=1&query=Avinguda+de+Sarri%C3%A0%2C+50%2C+08029+Barcelona%2C+Spain" target="_blank" rel="noopener noreferrer">Hotel Meliá Sarrià</a></span>
+              <span><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5" r="2.6" stroke="currentColor" stroke-width="1.2"/><path d="M2.5 14c.7-3 2.7-4.6 5.5-4.6s4.8 1.6 5.5 4.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>Led by Agustina, Alina, Mar Melero &amp; Nickolette</span>
               <span><svg viewBox="0 0 16 16" fill="none"><rect x="1.5" y="3.5" width="9" height="7" rx="1.2" stroke="currentColor" stroke-width="1.2"/><path d="M10.5 6.2l3.3-1.9v5.4l-3.3-1.9" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>Hybrid — Also via Google Meet</span>
             </div>
             <p class="event__desc event__desc--compact">A central working session bringing the entire group together to reflect, learn and grow — combining community updates, practical training and collective exercises to strengthen connections across the community.</p>
@@ -1240,7 +1253,7 @@ footer{
           <div class="event__body">
             <h3 class="event__title">Dinner with a Special Guest</h3>
             <div class="event__meta">
-              <span><svg viewBox="0 0 16 16" fill="none"><path d="M8 1c-3 0-5.5 2.4-5.5 5.5C2.5 10.5 8 15 8 15s5.5-4.5 5.5-8.5C13.5 3.4 11 1 8 1z" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="6.5" r="1.8" stroke="currentColor" stroke-width="1.2"/></svg>JUNO HOUSE Private Club</span>
+              <span><svg viewBox="0 0 16 16" fill="none"><path d="M8 1c-3 0-5.5 2.4-5.5 5.5C2.5 10.5 8 15 8 15s5.5-4.5 5.5-8.5C13.5 3.4 11 1 8 1z" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="6.5" r="1.8" stroke="currentColor" stroke-width="1.2"/></svg><a class="venue-link" href="https://www.google.com/maps/search/?api=1&query=Carrer+d%27Aribau%2C+226%2C+08006+Barcelona%2C+Spain" target="_blank" rel="noopener noreferrer">JUNO HOUSE Private Club</a></span>
             </div>
             <p class="event__desc">An intimate evening at Barcelona's first private members club created by and for women. Opened in April 2022, JUNO HOUSE brings together professional networking, creativity and holistic personal wellbeing.</p>
             <p class="event__desc">The group will be welcomed by the CEO and invited to discover the private club through an exclusive tour. Dinner will include a special guest who will join the table, share her personal journey and create a memorable conversation for the entire group.</p>
@@ -1276,7 +1289,7 @@ footer{
           <div class="event__time"><span class="event__number">No. 01</span>08:00</div>
           <div class="event__body">
             <h3 class="event__title">Breakfast</h3>
-            <div class="event__meta"><span><svg viewBox="0 0 16 16" fill="none"><path d="M8 1c-3 0-5.5 2.4-5.5 5.5C2.5 10.5 8 15 8 15s5.5-4.5 5.5-8.5C13.5 3.4 11 1 8 1z" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="6.5" r="1.8" stroke="currentColor" stroke-width="1.2"/></svg>Hotel Meliá Sarrià</span></div>
+            <div class="event__meta"><span><svg viewBox="0 0 16 16" fill="none"><path d="M8 1c-3 0-5.5 2.4-5.5 5.5C2.5 10.5 8 15 8 15s5.5-4.5 5.5-8.5C13.5 3.4 11 1 8 1z" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="6.5" r="1.8" stroke="currentColor" stroke-width="1.2"/></svg><a class="venue-link" href="https://www.google.com/maps/search/?api=1&query=Avinguda+de+Sarri%C3%A0%2C+50%2C+08029+Barcelona%2C+Spain" target="_blank" rel="noopener noreferrer">Hotel Meliá Sarrià</a></span></div>
             <p class="event__desc">A relaxed breakfast before beginning the day's cultural and culinary experiences.</p>
             <div class="event__vibe"><span class="event__vibe-label">The Vibe</span><p>Calm, informal and energizing.</p></div>
           </div>
@@ -1316,7 +1329,7 @@ footer{
           <div class="event__body">
             <h3 class="event__title">Culinary Masterclass</h3>
             <p class="event__subtitle">Paella and Fideuà</p>
-            <div class="event__meta"><span><svg viewBox="0 0 16 16" fill="none"><path d="M8 1c-3 0-5.5 2.4-5.5 5.5C2.5 10.5 8 15 8 15s5.5-4.5 5.5-8.5C13.5 3.4 11 1 8 1z" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="6.5" r="1.8" stroke="currentColor" stroke-width="1.2"/></svg>Grand Hyatt Barcelona</span></div>
+            <div class="event__meta"><span><svg viewBox="0 0 16 16" fill="none"><path d="M8 1c-3 0-5.5 2.4-5.5 5.5C2.5 10.5 8 15 8 15s5.5-4.5 5.5-8.5C13.5 3.4 11 1 8 1z" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="6.5" r="1.8" stroke="currentColor" stroke-width="1.2"/></svg><a class="venue-link" href="https://www.google.com/maps/search/?api=1&query=Pla%C3%A7a+de+Pius+XII%2C+4%2C+08028+Barcelona%2C+Spain" target="_blank" rel="noopener noreferrer">Grand Hyatt Barcelona</a></span></div>
             <p class="event__desc">A hands-on culinary session led by master chefs. Participants will put on their aprons and discover the methods, ingredients and traditions behind two of Spain's most iconic dishes: paella and fideuà.</p>
             <div class="event__vibe"><span class="event__vibe-label">The Vibe</span><p>Hands-on epicurean fun. A lively opportunity to cook, learn and share the experience together.</p></div>
           </div>
@@ -1330,7 +1343,7 @@ footer{
           <div class="event__time"><span class="event__number">No. 05</span>14:30</div>
           <div class="event__body">
             <h3 class="event__title">Lunch</h3>
-            <div class="event__meta"><span><svg viewBox="0 0 16 16" fill="none"><path d="M8 1c-3 0-5.5 2.4-5.5 5.5C2.5 10.5 8 15 8 15s5.5-4.5 5.5-8.5C13.5 3.4 11 1 8 1z" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="6.5" r="1.8" stroke="currentColor" stroke-width="1.2"/></svg>Grand Hyatt Barcelona</span></div>
+            <div class="event__meta"><span><svg viewBox="0 0 16 16" fill="none"><path d="M8 1c-3 0-5.5 2.4-5.5 5.5C2.5 10.5 8 15 8 15s5.5-4.5 5.5-8.5C13.5 3.4 11 1 8 1z" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="6.5" r="1.8" stroke="currentColor" stroke-width="1.2"/></svg><a class="venue-link" href="https://www.google.com/maps/search/?api=1&query=Pla%C3%A7a+de+Pius+XII%2C+4%2C+08028+Barcelona%2C+Spain" target="_blank" rel="noopener noreferrer">Grand Hyatt Barcelona</a></span></div>
             <p class="event__desc">Following the masterclass, the group will enjoy the dishes prepared during the session alongside tapas, local wines and traditional Mediterranean desserts.</p>
             <div class="event__vibe"><span class="event__vibe-label">The Vibe</span><p>Indulgent and relaxed. A long Mediterranean lunch to enjoy the results of the culinary experience.</p></div>
           </div>
@@ -1354,12 +1367,17 @@ footer{
         <span class="event__marker" aria-hidden="true"></span>
         <div class="event__grid">
           <span class="event__spine" aria-hidden="true"></span>
-          <div class="event__time"><span class="event__number">No. 07</span>20:30</div>
+          <div class="event__time"><span class="event__number">No. 07</span>21:00</div>
           <div class="event__body">
             <h3 class="event__title">Farewell Dinner Party</h3>
-            <div class="event__meta"><span><svg viewBox="0 0 16 16" fill="none"><path d="M8 1c-3 0-5.5 2.4-5.5 5.5C2.5 10.5 8 15 8 15s5.5-4.5 5.5-8.5C13.5 3.4 11 1 8 1z" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="6.5" r="1.8" stroke="currentColor" stroke-width="1.2"/></svg>Venue to Be Confirmed</span></div>
-            <p class="event__desc">The final evening celebration of the gathering. The venue will be selected to combine an elegant dinner with music, energy and the possibility of dancing together — the closing celebration of the weekend and of the relationships, conversations and memories created in Barcelona.</p>
+            <div class="event__meta"><span><svg viewBox="0 0 16 16" fill="none"><path d="M8 1c-3 0-5.5 2.4-5.5 5.5C2.5 10.5 8 15 8 15s5.5-4.5 5.5-8.5C13.5 3.4 11 1 8 1z" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="6.5" r="1.8" stroke="currentColor" stroke-width="1.2"/></svg><a class="venue-link" href="https://www.google.com/maps/search/?api=1&query=Pla%C3%A7a+de+la+Rosa+dels+Vents%2C+1%2C+08039+Barcelona%2C+Spain" target="_blank" rel="noopener noreferrer">COYA Barcelona</a></span></div>
+            <p class="event__desc">The evening begins on the terrace, facing the sea, with a welcome glass of cava and canapés as the sun goes down. From there, the group moves to a menu created specially for us at COYA — with a few surprises along the way.</p>
+            <p class="event__desc">The final evening celebration of the gathering, combining an elegant dinner with music, energy and the possibility of dancing together — the closing celebration of the weekend and of the relationships, conversations and memories created in Barcelona.</p>
             <div class="event__vibe"><span class="event__vibe-label">The Vibe</span><p>High energy, glamour, joy and unforgettable memories. A celebration of sisterhood, friendship and the power of the community.</p></div>
+            <span class="event__dress">
+              <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M5 2l3 2 3-2 2 3-2 1v8H3V6L1 5l2-3z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/></svg>
+              Dress Code — Chic
+            </span>
           </div>
         </div>
       </article>
